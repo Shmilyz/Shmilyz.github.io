@@ -87,7 +87,7 @@ service-worker: true
 # Friends
 friends: [
     {
-    #     title: "老史",
-    #     href: "http://sfturing.cn/"
-    # }
+         title: "老史",
+         href: "http://sfturing.cn/"
+     }
 ]
