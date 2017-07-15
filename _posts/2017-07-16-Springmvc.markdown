@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "Spring MVC运行流程中关于postHandler与调用HandlerExceptionHandler之间的关系"
-subtitle:   "Spring MVC运行流程中关于postHandler与调用HandlerExceptionHandler之间的关系"
+title:      "Spring MVC运行流程问题"
+subtitle:   ""
 date:       2017-07-16 12:00:00
 author:     "田俊哲"
 header-img: "img/post-bg-js-version.jpg"
@@ -9,7 +9,6 @@ tags:
     - Spring MVC
     - JavaScript
     - Spring
-    -	解决问题
 ---
 
 #### 简述SpringMVC的运行流程
