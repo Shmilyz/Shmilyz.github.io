@@ -1,8 +1,8 @@
 ---
 layout:     post
 title:      "Spring MVC运行流程中关于postHandler与调用HandlerExceptionHandler之间的关系"
-subtitle:   ""
-date:       2017-07-16
+subtitle:   "Spring MVC运行流程中关于postHandler与调用HandlerExceptionHandler之间的关系"
+date:       2017-07-16 12:00:00
 author:     "田俊哲"
 header-img: "img/post-bg-js-version.jpg"
 tags:
@@ -55,5 +55,5 @@ tags:
 #### 著作权声明
 
 
-作者 [田俊哲](http://weibo.com/huxpro)，首次发布于 [Shmilyz Blog](https://shmilyz.github.io)，本文原创，转载请保留以上链接！
+作者 [田俊哲](https://shmilyz.github.io)，首次发布于 [Shmilyz Blog](https://shmilyz.github.io)，本文原创，转载请保留以上链接！
 
