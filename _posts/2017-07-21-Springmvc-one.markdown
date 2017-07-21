@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Spring MVC源码分析系列之如何获取HandlerExecutionChain对象"
+title:      "Spring MVC源码分析系列之获取HandlerExecutionChain对象"
 subtitle:   ""
 date:       2017-07-21 12:00:00
 author:     "田俊哲"
