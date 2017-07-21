@@ -1,13 +1,12 @@
 ---
 layout:     post
-title:      "Spring MVC运行流程问题"
+title:      "Spring MVC源码分析系列之Spring MVC运行流程问题"
 subtitle:   ""
 date:       2017-07-16 12:00:00
 author:     "田俊哲"
 header-img: "img/post-bg-digital-native.jpg"
 tags:
     - Spring MVC
-    - JavaScript
     - Spring
 ---
 
