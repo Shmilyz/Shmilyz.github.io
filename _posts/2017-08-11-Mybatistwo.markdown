@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Mybatis源码分析第而讲之SQLSessionFactory的初始化"
+title:      "Mybatis源码分析第二讲之SQLSessionFactory的初始化"
 subtitle:   ""
 date:       2017-08-11 12:00:00
 author:     "田俊哲"
@@ -14,7 +14,7 @@ tags:
 	
 
 
-#### Mybatis源码分析第而讲之SQLSessionFactory的初始化
+#### Mybatis源码分析第二讲之SQLSessionFactory的初始化
 
 ![java-javascript](/img/in-post/first-mybatis/1.png)
 ![java-javascript](/img/in-post/first-mybatis/2.png)
