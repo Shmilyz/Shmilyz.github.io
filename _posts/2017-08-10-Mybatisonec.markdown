@@ -18,7 +18,6 @@ tags:
 
 MyBatis原名iBatis，它是一个支持普通SQL查询,存储过程和高级映射的优秀持久层框架等等等，这些概念和历史百度都能搜到，我就不在这里赘述了，简单的说MyBatis就是一个基于JDBC的可以与数据库进行交互的半自动的框架，正式因为JDBC的繁琐，导致我们有必要将JDBC进行封装作为底层方法，并且又添加了多种功能，比如对sql语句编写等，更方便更优雅的让我们与数据库进行交互。这也就引出了MyBatis与另一款全自动全映射的数据库交互框架hibernate的区别。我们都知道hibernate标榜的就是全自动全映射，啥叫全自动呢，就是说hibernate旨在让程序员不用会写sql都可以与数据库进行交互，这种简单直接的方法得到了很多程序员的青睐，而慢慢的大家发现，hibernate并不能替我们编写一些复杂的sql语句，也不能对这些复杂的sql语句进行优化，大大的影响的交互效率，而如果我们想要自己编写sql就得要去学hql，反而增加了我们的负担。由于是全自动，所以我们无法控制我们想到javabean中的哪个或哪几个值，而是映射了全部。这也大大增加了内存负担。所以我个人的观点，全自动全映射是hibernate的优点，同样也是hibernate的缺点，致命的缺点。而MyBatis则完美的解决了这个问题。
 
-我们都知道jdbc的几个核心的流程
 
 
 > 作者注：观点仅代表个人观点，如有错误，欢迎指点。
@@ -44,6 +43,14 @@ MyBatis原名iBatis，它是一个支持普通SQL查询,存储过程和高级映
 
 #### MyBatis源码分析步骤
 我们都知道我们要使用MyBatis与数据库进行交互要创建抽象类里面有增删改查的方法，还要有全局配置文件以及抽象类对应的mapper文件，里面写sql语句等其他属性，最后我们要一个一个调用这些文件。代码如下:
+```html
+  String resource = "mybatis-config.xml";
+  InputStream inputStream = Resources.getResourceAsStream(resource);
+   SqlSessionFactory sqlSessionFactory =new SqlSessionFactoryBuilder().build(inputStream);
+   SqlSession openSession=sqlSessionFactory.openSession(true);
+    EmployeeMapper mapper=openSession.getMapper(EmployeeMapper.class);
+Employee employee=mapper.getEmpById(1);
+```
 
 
 
