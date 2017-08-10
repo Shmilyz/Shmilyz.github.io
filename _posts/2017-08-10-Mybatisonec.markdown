@@ -30,7 +30,7 @@ MyBatis原名iBatis，它是一个支持普通SQL查询,存储过程和高级映
 - 执行sql语句
 - 封装结果并返回
 
-而MyBatis将编写sql这一步流程开放给开发人员，所有的sql，不论简单的还是复杂的全部由开发人员去完成。而其他几步仍交由MyBatis来去做，所以在介绍MyBatis的时候我说，MyBatis是一个半自动的框架。我并不了解MyBatis和hibernate两者与数据库交互的效率哪个更高，我也没有做过测试，但我认为两者由于底层方法都是JDBC所以两者之间的效率应该没有多大的差距。而更多的开发人员选择MyBatis就是看中它可以自由的编写sql语句，而MyBatis还为我们提供了两个好玩的福利，MyBatis的插件开发和MyBatis的mbg逆向工程。插件开发不多说，mbg对很多开发者比较陌生，mbg旨在不让用户写一个javabean不让用户写一个sql语句也就是不让用户创建一个抽象类和对应的mapper。全部由MyBatis为我们生成这些文件。是不是很有趣。
+而MyBatis将编写sql这一步流程开放给开发人员，所有的sql，不论简单的还是复杂的全部由开发人员去完成。而其他几步仍交由MyBatis来去做，所以在介绍MyBatis的时候我说，MyBatis是一个半自动的框架。我并不了解MyBatis和hibernate两者与数据库交互的效率哪个更高，我也没有做过测试，但我认为两者由于底层方法都是JDBC所以两者之间的效率应该没有多大的差距。而更多的开发人员选择MyBatis就是看中它可以自由的编写sql语句，而MyBatis还为我们提供了两个好玩的福利，MyBatis的插件开发和MyBatis的mbg逆向工程。插件开发不多说，mbg对很多开发者比较陌生，mbg旨在不让用户写一个javabean不让用户写一个sql语句也就是不让用户创建一个接口类和对应的mapper。全部由MyBatis为我们生成这些文件。是不是很有趣。
 
 > 作者注：MyBatis另一大优点sql语句与java文件的分离，我们将sql语句写在mapper文件中，这样就可以不会因为修改javade中的sql语句导致java文件进行重新编译。
 
@@ -42,7 +42,7 @@ MyBatis原名iBatis，它是一个支持普通SQL查询,存储过程和高级映
 - 。。。。
 
 #### MyBatis源码分析步骤
-我们都知道我们要使用MyBatis与数据库进行交互要创建抽象类里面有增删改查的方法，还要有全局配置文件以及抽象类对应的mapper文件，里面写sql语句等其他属性，最后我们要一个一个调用这些文件。代码如下:
+我们都知道我们要使用MyBatis与数据库进行交互要创建接口类里面有增删改查的方法，还要有全局配置文件以及接口类对应的mapper文件，里面写sql语句等其他属性，最后我们要一个一个调用这些文件。代码如下:
 ```html
   String resource = "mybatis-config.xml";
   InputStream inputStream = Resources.getResourceAsStream(resource);
