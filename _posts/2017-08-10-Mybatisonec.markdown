@@ -46,11 +46,13 @@ MyBatis原名iBatis，它是一个支持普通SQL查询,存储过程和高级映
 ```html
   String resource = "mybatis-config.xml";
   InputStream inputStream = Resources.getResourceAsStream(resource);
-   SqlSessionFactory sqlSessionFactory =new SqlSessionFactoryBuilder().build(inputStream);
-   SqlSession openSession=sqlSessionFactory.openSession(true);
-    EmployeeMapper mapper=openSession.getMapper(EmployeeMapper.class);
-Employee employee=mapper.getEmpById(1);
+  SqlSessionFactory sqlSessionFactory =new SqlSessionFactoryBuilder().build(inputStream);
+  SqlSession openSession=sqlSessionFactory.openSession(true);
+  EmployeeMapper mapper=openSession.getMapper(EmployeeMapper.class);
+	Employee employee=mapper.getEmpById(1);
 ```
+
+而我们将按照代码的顺序分几次来分析Mybatis的源码。
 
 
 
