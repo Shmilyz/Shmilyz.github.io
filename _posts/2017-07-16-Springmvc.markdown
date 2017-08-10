@@ -21,7 +21,7 @@ tags:
 
 首先用户发送请求后有我们的SpringDispatcherServlet进行拦截，然后交由处理映射器去检查我们在SpringMVC中是否存在对应的映射，如果不存在我们则去查看我们是否配置了default-servlet-handler，没有控制台报错，并显示404页面，如果存在目标资源，则显示目标资源，同样不存在则显示404页面，另一个分支，当我们SpringMVC存在对应的映射后，我们由HandlerMapping获取到HandlerExecutionChain处理器调用链，在这个处理器调用链中存在两个东西，一是我们相关的interceptors拦截器，二是我们的handler（目标处理器）以及目标方法。获取到我们这个处理器调用链后，我们去获取HandlerAdapter对象，这个适配器的作用，是可以对我们的提交表单中的内容进行校验，更换格式，格式化处理，过滤等相关工作，再然后调用我们拦截器的PreHandle方法，在之后获取我们的ModelAndView对象（不论我们用的是map或者model等最后都会转化成一个ModelAndView类型的对象），得到对象后，我们就可以调用拦截器的postHandle方法了（注:这个过程的细节正式我下面要说的），如果目标方法存在异常则由HandlerExceptionHandler组件处理异常，得到新的ModelAndView对象，最后我们将ModelAndView对象转换成实际的View,渲染视图，调用拦截器的afterCompletion方法释放后这个过程就结束了了。
 
-> 译者注：添加"<mvc:default-servlet-handler/>"的同时不要忘记添加 "<mvc:annotation-driven/>",作用是如果映射过 Springmvc会找到对应的映射方法，如果没有映射则帮你去找相关资源。
+> 译者注：添加"mvc:default-servlet-handler"的同时不要忘记添加 "mvc:annotation-driven",作用是如果映射过 Springmvc会找到对应的映射方法，如果没有映射则帮你去找相关资源。
 
 
 #### 问题发现
