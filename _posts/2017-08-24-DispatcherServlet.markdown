@@ -109,7 +109,7 @@ DispatcherServlet]-[DEBUG] Successfully completed request
 图一中的JspServlet会处理后缀为(*.jsp, *.jspx)的文件，这也就解释了为什么我们可以得到对应页面了，我们可以自己做一个小实验，由于在WEB-INF的jsp无法直接诶访问，我们在WEB-INF外写一个简单的jsp文件，并发送该请求，我们可以直接得到对应的页面，这就是JspServlet的作用。
 
 
-而我们的图二将和我们的第二讲有一定的联系，对于Springmvc我们如果想访问静态资源是要通过配置<mvc:default-servlethandler/>，我们通过这种方式解决静态资源访问问题。我们这里先了解一下，我们将在第二讲研究这个延伸出来的问题。
+而我们的图二将和我们的第二讲有一定的联系，对于Springmvc我们如果想访问静态资源是要通过配置"mvc:default-servlethandler"，我们通过这种方式解决静态资源访问问题。我们这里先了解一下，我们将在第二讲研究这个延伸出来的问题。
 
 
 
