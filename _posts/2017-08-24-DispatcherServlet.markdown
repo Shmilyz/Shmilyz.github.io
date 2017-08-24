@@ -2,7 +2,7 @@
 layout:     post
 title:      "带你了解DispatcherServlet的url-pattern配置"
 subtitle:   ""
-date:       2017-08-11 12:00:00
+date:       2017-08-24 12:00:00
 author:     "田俊哲"
 header-img: "img/post-bg-digital-native.jpg"
 tags:
