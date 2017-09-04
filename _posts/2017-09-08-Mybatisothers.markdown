@@ -37,10 +37,11 @@ tags:
 
 [Mybatis源码分析第七讲之Mybatis与数据库交互核心源码](https://shmilyz.github.io/2017/09/04/Mybatisseven/)
 
-[田俊哲](https://shmilyz.github.io)
+[Mybatis源码分析第八讲之对Mybatis四大对象总结](https://shmilyz.github.io/2017/09/05/Mybatiseight/)
 
-[田俊哲](https://shmilyz.github.io)
-[田俊哲](https://shmilyz.github.io)
+[Mybatis源码分析第九讲之Mybatis两次包装分析](https://shmilyz.github.io/2017/09/07/Mybatispack/)
+
+[Mybatis源码分析第十讲之最后总结](https://shmilyz.github.io/2017/09/08/Mybatisothers/)
 
 #### 总结
 
