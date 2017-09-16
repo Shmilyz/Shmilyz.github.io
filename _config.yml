@@ -4,7 +4,7 @@ SEOTitle: 田俊哲的博客 | Shmilyz Blog
 header-img: img/home-bg.jpg
 email: zunzunzun8@163.com
 description: "关于前端与Android JavaEE | 田俊哲，Web & Mobile Lover，Front-End Engineer，UX Designer | 这里是 @田俊哲 的个人博客，与你一起发现更大的世界。"
-keyword: "田俊哲,Shmilyz田俊哲 , @田尊尊, 田俊哲的博客, Shmilyz Blog, 博客, 个人网站, 互联网, 前端, Android, 产品, JavaEE, 张梦, 张梦的男朋友"
+keyword: "田俊哲,Shmilyz田俊哲 , @田尊尊, 田俊哲的博客, Shmilyz Blog, 博客, 个人网站, 互联网, 前端, Android, 产品, JavaEE"
 url: "https://shmilyz.github.io/"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -90,7 +90,7 @@ friends: [
          title: "老史",
          href: "http://sfturing.cn/"
      }
-         
+        , 
          {
          title: "鼻子",
          href: "https://ice-tear.github.io/"
