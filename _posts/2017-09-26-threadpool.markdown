@@ -61,10 +61,10 @@ ThreadPoolExecutor是线程池中最核心的一个实现类，如果我们要�
 5.`workQueue`:相当于例子中，我们的十个工人都在忙各自的活，但还有新的订单老板只能将订单进行排列，等工人完成之后再让他们去干新的任务。那么这些等待任务就要对他们进行排序，而我们要设置他们的执行方式。
   
   
-	ArrayBlockingQueue：基于数组结构的有界阻塞队列，先进先出；
-
   LinkedBlockingQuene：基于链表结构的阻塞队列，先进先出，吞吐量通常要高于ArrayBlockingQuene；
   
+  ArrayBlockingQueue：基于数组结构的有界阻塞队列，先进先出；
+
   SynchronousQuene：一个不存储元素的阻塞队列，每个插入操作必须等到另一个线程调用移除操作，否则插入操作一直处于阻塞状态，吞吐量通常要高于LinkedBlockingQuene；
 
 6.`threadFactory`:创建线程的工厂，通过自定义的线程工厂可以给每个新建的线程设置一个具有识别度的线程名。
