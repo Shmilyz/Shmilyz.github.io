@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "大话java线程池"
+title:      "大话java系列之线程池"
 subtitle:   ""
 date:       2017-09-26 12:00:00
 author:     "田俊哲"
@@ -14,7 +14,7 @@ tags:
 	
 
 
-#### 大话java线程池之前言
+#### 大话java系列之线程池之前言
 
 
 
@@ -24,7 +24,7 @@ tags:
 
 讲线程池我们将分两个方向去讲，ThreadPoolExecutor类和Executors类。其中ThreadPoolExecutor是Executors类的底层实现。所以我们还是要简单的讲一下ThreadPoolExecutor类。然后我们再去细讲Executors类的方法。
 
-#### 大话java线程池之内容
+#### 大话java系列之线程池之内容
 
 
 
@@ -75,6 +75,8 @@ ThreadPoolExecutor是线程池中最核心的一个实现类，如果我们要�
 	DiscardOldestPolicy：丢弃阻塞队列中靠最前的任务，并执行当前任务；
 	
 	DiscardPolicy：直接丢弃任务；
+	
+	
 	
 	
 	
@@ -130,7 +132,7 @@ ThreadPoolExecutor是线程池中最核心的一个实现类，如果我们要�
 
 
 
-#### 大话java线程池之例子
+#### 大话java系列之线程池之例子
 
 
 
@@ -158,7 +160,7 @@ ThreadPoolExecutor是线程池中最核心的一个实现类，如果我们要�
 
 
 
-#### 大话java线程池之延伸
+#### 大话java系列之线程池之延伸
 
 `invokeAll()`
 
@@ -292,7 +294,7 @@ ExecutorService的invokeAny方法有两种用法：
 
 
 
-#### 大话java线程池之总结
+#### 总结
 
 
 就此，线程池的所有内容也就讲完了，我所讲的内容覆盖了大部分线程池知识，谢谢大家的关注。我们下一篇见。
