@@ -26,6 +26,7 @@ tags:
 
 #### 大话java线程池之内容
 
+
 - ThreadPoolExecutor类
 
 ThreadPoolExecutor是线程池中最核心的一个实现类，如果我们要了解线程池，我们也要了解这个类，以及构造方法中的属性。这有助于我们优化线程池的配置。使线程池达到我们理想中的最优化。
@@ -39,32 +40,41 @@ ThreadPoolExecutor是线程池中最核心的一个实现类，如果我们要�
 3.`keepAliveTime`:这个属性相当于辞退临时工的时间，在默认情况下，只有线程池的数量大于corePoolSize的时候，keepAliveTime才会起作用，直到线程池中的线程数不大于corePoolSize，即当线程池中的线程数大于corePoolSize时，如果一个线程空闲的时间达到keepAliveTime，则会终止，直到线程池中的线程数不超过corePoolSize。如果我们的临时工没有活干，老板当然不会养闲人了，肯定会辞退他们，但是老板并不会将经验丰富的正式工辞退。
 
 4.`unit`:参数keepAliveTime的时间单位，有7种取值，在TimeUnit类中有7种静态属性：
-	```
+	
 	TimeUnit.DAYS;               //天
+	
 	TimeUnit.HOURS;             //小时
+	
 	TimeUnit.MINUTES;           //分钟
+	
 	TimeUnit.SECONDS;           //秒
+	
 	TimeUnit.MILLISECONDS;      //毫秒
+	
 	TimeUnit.MICROSECONDS;      //微妙
+	
 	TimeUnit.NANOSECONDS;       //纳秒
-```
+
 
 5.`workQueue`:相当于例子中，我们的十个工人都在忙各自的活，但还有新的订单老板只能将订单进行排列，等工人完成之后再让他们去干新的任务。那么这些等待任务就要对他们进行排序，而我们要设置他们的执行方式。
-  ```
-  ArrayBlockingQueue：基于数组结构的有界阻塞队列，先进先出；
+  
+	ArrayBlockingQueue：基于数组结构的有界阻塞队列，先进先出；
+
   LinkedBlockingQuene：基于链表结构的阻塞队列，先进先出，吞吐量通常要高于ArrayBlockingQuene；
+  
   SynchronousQuene：一个不存储元素的阻塞队列，每个插入操作必须等到另一个线程调用移除操作，否则插入操作一直处于阻塞状态，吞吐量通常要高于LinkedBlockingQuene；
-	```
-	
+
 6.`threadFactory`:创建线程的工厂，通过自定义的线程工厂可以给每个新建的线程设置一个具有识别度的线程名。
 
 7.`handler`:还是拿上面的例子，当老板发现哪怕招了四个临时工依然解决不了订单阻塞无法执行的问题，那么解决办法就是将订单遗弃或者抛出异常等。线程池的饱和策略，当阻塞队列满了，且没有空闲的工作线程，如果继续提交任务，必须采取一种策略处理该任务，线程池提供了四种对应策略。
-	```
 	AbortPolicy：直接抛出异常，这是默认的策略；
+	
 	CallerRunsPolicy：用调用者所在的线程来执行任务， 它既不会丢弃任务，也不会抛出任何异常，它会把任务推回到调用者那里去,以此缓解任务流，它直接在 execute 方法的调用线程中运行被拒绝的任务；
+	
 	DiscardOldestPolicy：丢弃阻塞队列中靠最前的任务，并执行当前任务；
+	
 	DiscardPolicy：直接丢弃任务；
-	```
+
 
 
 
