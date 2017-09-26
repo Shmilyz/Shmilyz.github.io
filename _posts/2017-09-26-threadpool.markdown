@@ -26,9 +26,10 @@ tags:
 
 #### 大话java系列之线程池之内容
 
+讲线程池我们将分两个方向去讲，ThreadPoolExecutor类和Executors类。其中ThreadPoolExecutor是Executors类的底层实现。所以我们还是要简单的讲一下ThreadPoolExecutor类。然后我们再去细讲Executors类的方法。
 
 
-- ThreadPoolExecutor类
+#### ThreadPoolExecutor类
 
 ThreadPoolExecutor是线程池中最核心的一个实现类，如果我们要了解线程池，我们也要了解这个类，以及构造方法中的属性。这有助于我们优化线程池的配置。使线程池达到我们理想中的最优化。
 
@@ -59,6 +60,7 @@ ThreadPoolExecutor是线程池中最核心的一个实现类，如果我们要�
 
 5.`workQueue`:相当于例子中，我们的十个工人都在忙各自的活，但还有新的订单老板只能将订单进行排列，等工人完成之后再让他们去干新的任务。那么这些等待任务就要对他们进行排序，而我们要设置他们的执行方式。
   
+  
 	ArrayBlockingQueue：基于数组结构的有界阻塞队列，先进先出；
 
   LinkedBlockingQuene：基于链表结构的阻塞队列，先进先出，吞吐量通常要高于ArrayBlockingQuene；
@@ -81,7 +83,7 @@ ThreadPoolExecutor是线程池中最核心的一个实现类，如果我们要�
 	
 	
 
-- Exectors类
+#### Exectors类
 
 
 我们刚才说ThreadPoolExecutor类是Exectors类的底层实现，而Exectors类为我们提供了几种创建策略，下面我们来介绍一下这些策略方法。
