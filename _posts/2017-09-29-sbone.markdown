@@ -84,7 +84,7 @@ SpringBootDemoApplication相当于我们项目的开关，我们运行该类则�
 
 就这样我们发送index请求，打印出hello world出来，这里我们也没有设置tomcat则直接运行成功，印证前面说的内嵌servlet。
 
-![java-javascript](/img/in-post/first-sb/12.png)】
+![java-javascript](/img/in-post/first-sb/12.png)
 
 下面我们来配置一下Spring boot的热部署，所谓热部署就是当我们启动spring boot之后，每当我们修改代码并且保存spring boot将会自动的重新加载而不需要我们重启。首先我们在pop中添加这个插件包。下一步。
 
