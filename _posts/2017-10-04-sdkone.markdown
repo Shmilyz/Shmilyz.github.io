@@ -1,0 +1,83 @@
+---
+layout:     post
+title:      "教你写SDK系列之阿里云大鱼短信验证码的使用"
+subtitle:   ""
+date:       2017-10-04 12:00:00
+author:     "田俊哲"
+header-img: "img/post-bg-digital-native.jpg"
+tags:
+    - SDK
+    - 教你写SDK系列
+---
+
+
+	
+
+
+#### 作者说
+
+从这一系列开始，大家跟作者学习一些常用的SDK，该章我们将为大家讲解阿里大鱼短信验证码SDK的使用。该讲源码已经上传[Github](https://github.com/Shmilyz/SmsDemo)可下载工具包直接调用。
+
+#### 接入SDK
+
+
+
+首先我们需要去到我们的阿里云官方网站注册我们的阿里云账号，由于阿里云涉及大量的SDK，查找不方便，我们可以百度[阿里大鱼](https://dayu.aliyun.com/),阿里大鱼是阿里云旗下的云通信服务，作者建议我们使用我们的支付宝账号登录，支付宝账号的蚂蚁信用对我们后期SDK的认证有很大的作用，在我们注册账号后我们进入我们的控制台，我们按照图所示申请我们的短信签名和短信模板，短信签名指我们每次收到验证短信总会在后面或前面有【田俊哲】，其中田俊哲就是该短信的签名，短信模板就不用我说了，就是该条条短信的内容，这里注意一下，短信的模版中可以添加变量，按照阿里云给的写法去建立模版，到后面我们需要在代码中为我们的变量赋值，如果不想添加过多变量，可以只增加验证码哪一个变量，到代码端我们只需要为我们的code设置值即可。
+
+
+![java-javascript](/img/in-post/first-sdk/8.png)
+![java-javascript](/img/in-post/first-sdk/9.png)
+![java-javascript](/img/in-post/first-sdk/10.png)
+![java-javascript](/img/in-post/first-sdk/11.png)
+![java-javascript](/img/in-post/first-sdk/12.png)
+
+
+
+按照如图所示的方式我们去创建我们的签名和模板，审核时间一般为一到三个工作日，按照阿里云的速度半天也就可以了，很快，这也是我喜欢阿里云的地方，比某易的云短信服务要人性化太多。下面我们还有两步要做，下载sdk和创建我们AccessKey。
+
+![java-javascript](/img/in-post/first-sdk/13.png)
+![java-javascript](/img/in-post/first-sdk/14.png)
+
+就这样我们很简单的创建好了我们的AccessKey，这里注意我们的AccessKey千万不能泄露出去，相当于账号和密码，给别的开发者使用的话，我们将会收到无穷无尽的账单。因为小白也不知道AccessKey是啥，用你的就完事了。而SDK的下载这里我就不给大家链接了，控制台随处可见，我们只需要将下载的包解压缩，里面有两个jar包和一个demo包。我们开发只需要将两个jar包导入即可。根据阿里云提供的demo，我修改了其中的部分代码，增加了功能，具体的去我的github找源码，我这里将一下如何使用我github中的源码。
+
+
+
+![java-javascript](/img/in-post/first-sdk/6.png)
+
+整个项目就两个类，方法类和运行方法类，首先我们要在SmsMethod类中的箭头处，添加我们AccessKey，上面讲到了控制台可以找到。
+
+
+
+![java-javascript](/img/in-post/first-sdk/7.png)
+
+在sendSms()方法中我们还要添加我们的短信签名，这里不要使用田俊哲，要更改为已经审核通过的自己签名，还要添加我们短信模板的code，也可以在控制台找到。剩下的就没什么了。我们来做个测试。
+
+
+![java-javascript](/img/in-post/first-sdk/2.png)
+
+这是我们发送短信及返回基本信息的代码。我们往sendSms()方法里面传入手机号和验证码，下面输出的代码是返回的信息，返回是否成功等都在这里显示。
+
+![java-javascript](/img/in-post/first-sdk/3.png)
+
+这里是返回我们的详细信息，除了可以返回上图中的信息还可以返回例如短信内容在内的信息。
+
+![java-javascript](/img/in-post/first-sdk/1.png)
+
+该图显示我们的短信接口返回的数据和明细。
+
+![java-javascript](/img/in-post/first-sdk/5.png)
+![java-javascript](/img/in-post/first-sdk/4.png)
+
+
+我们通过调用querySendDetailsByPhone(phone)方法得到手机号所接收到过的所有短信。
+
+#### 总结
+
+该SDK可以运用于我们的修改密码注册等多种情景。价格便宜，大鱼甚至为我们提供了十元的代金券。最后谢谢大家的阅读，我们下一篇见。
+
+
+
+#### 著作权声明
+
+作者 [田俊哲](https://shmilyz.github.io)，首次发布于 [Shmilyz Blog](https://shmilyz.github.io)，本文原创，转载请保留以上链接！
+
