@@ -1,0 +1,70 @@
+---
+layout:     post
+title:      "解决问题系列之在springmvc中AJAX发送PUT请求Tomcat无法封装解决方案及源码分析"
+subtitle:   ""
+date:       2017-10-06 12:00:00
+author:     "田俊哲"
+header-img: "img/post-bg-digital-native.jpg"
+tags:
+    - 解决问题
+    - Spring MVC
+---
+
+
+	
+
+
+#### 问题重现
+
+当我们使用jQuery写ajax的时候在处理PUT请求时，如果不加上述过滤器会出现我们无法进行封装POJO对象，但通过开发者工具我们可以看到请求中还是获取到了我们要的值。只是Springmvc没有将对应的值赋值给对应的了javabean对象，也就导致我们获取到的javabean对象里面的属性为null。就这个问题我们来进行一个讨论和源码分析。
+
+
+#### 解决思路
+
+
+我们先来按流程讲一遍我们Springmvc如何将请求体里的数据一个一个对应给javabean对象的属性。首先，Tomcat会将请求体中的数据封装成一个map对象，通过request.getParameter("")就可以得到我们想要的javabean对象属性值。然后，Springmvc就可以通过调用上一步的方法进行封装POJO对象。所以作者认为Tomcat并没有将我们的请求封装成一个map，为了验证这个猜想，我们做一个实验，我们在Controller类对应的方法中获取HTTPServletRequest对象，并且调用request.getParameter("")，正如作者所猜想的，获取的结果却是为null，也就证明Tomcat对于PUT请求的数据并不会直接去封装成一个map。作者通过网上的查询得知，Tomcat会对post和get请求进行封装map，而不会对put和delete请求进行封装操作，而是直接返回。
+
+
+#### 解决方法
+
+我这里为大家提供两种解决方案。
+
+方法一，在写ajax的时候，type依然写"POST",而在data处我们要在最后面添上“&_method=PUT”,这样我们下图的过滤器则会进行拦截，并将POST转为PUT请求。由于他一开始还是个POST请求所以Tomcat会将对请求的值进行封装。
+
+
+![java-javascript](/img/in-post/first-question/1.png)
+
+方法二，虽然方法一解决了ajax的PUT请求问题，但显然不够优雅，比较轴的同学依然会想我们就在type这个位置写"PUT"。当然我们也可以实现，加上下图所示的过滤器即可。
+
+![java-javascript](/img/in-post/first-question/2.png)
+
+这样我们直接在type这个位置写"PUT"就好啦。
+
+
+#### 过滤器源码分析
+
+
+![java-javascript](/img/in-post/first-question/3.png)
+
+按图所示解释我们先把request的请求内容读取出来并封装map，然后与request一起传入HttpPutFormContentRequestWrapper()方法中，我们进入这个方法。
+
+![java-javascript](/img/in-post/first-question/4.png)
+
+我们看HttpPutFormContentRequestWrapper()方法体中先将我们刚传入的map对象赋给formParameters，而这不是重点，重点是我蓝标的地方，这里大家看这个方法非常的熟悉，这里重写了request的getParameter()方法，进入方法体，我们先调用父类的getParameter()方法获取我们的value，然后我们在获取formParameters中name对应的value，最后做判断，如果原生的requset可以取出name对应的value，就用第一个，如果取不出来，则用第二个formValue。最后返回。
+
+
+我们想一下整个流程啊，我们的springmvc会调用request的getParameter()方法，这里调用的就是被重写过的getParameter()方法了，以前Tomcat不会封装PUT请求，而这个过滤器做到的就是帮我们封装了PUT请求体中的数据，springmvc可以顺利的得到我们想要的value值了。
+
+
+
+
+#### 总结
+
+我们对ajax发送PUT请求无法封装的原因进行了分析及给出了解决方案。我们在分析的过程中也复习了request相关知识。谢谢大家的阅读，我们下篇见。
+
+
+
+#### 著作权声明
+
+作者 [田俊哲](https://shmilyz.github.io)，首次发布于 [Shmilyz Blog](https://shmilyz.github.io)，本文原创，转载请保留以上链接！
+
