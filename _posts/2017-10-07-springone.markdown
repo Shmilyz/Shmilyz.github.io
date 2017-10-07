@@ -87,35 +87,46 @@ tags:
 在讲完上述概念之后，我们开始讲Spring是如何支持事务的。
 
 
-#### Spring的事务
+
+#### 事务实例搭建
+
+Spring的事务是通过AOP来完成的，我们的开启事务相当于前置通知，提交事务相当于返回通知，回滚事务相当于异常通知，关闭事务则是一个后置通知。这是我们Spring来实现事务的底层流程出发点。
+
+Spring可以通过声明式事务来管理，我们只需要像以前那样去写事务里面的代码，剩下的由Spring来替我们写。
+
+我们来实现一个功能，我们新建三个数据库表。
 
 
 
-![java-javascript](/img/in-post/first-question/2.png)
+![java-javascript](/img/in-post/one-spring/1.png)
+![java-javascript](/img/in-post/one-spring/2.png)
+![java-javascript](/img/in-post/one-spring/3.png)
+
+book：书的名字和价钱
+
+account：用户拥有的资金
+
+book_stock：每本书的库存
+
+我们写三个方法来完成我们的需求。我们的需求是一个用户买书，买书的步骤是先将对应书的库存减一，然后将我们用户的账户减去书的价格。
 
 
+![java-javascript](/img/in-post/one-spring/4.png)
+![java-javascript](/img/in-post/one-spring/5.png)
+![java-javascript](/img/in-post/one-spring/6.png)
 
-#### 过滤器源码分析
+下面我们来写买书这个方法。
 
+![java-javascript](/img/in-post/one-spring/7.png)
+![java-javascript](/img/in-post/one-spring/8.png)
 
-![java-javascript](/img/in-post/first-question/3.png)
-
-按图所示解释我们先把request的请求内容读取出来并封装map，然后与request一起传入HttpPutFormContentRequestWrapper()方法中，我们进入这个方法。
-
-![java-javascript](/img/in-post/first-question/4.png)
-
-我们看HttpPutFormContentRequestWrapper()方法体中先将我们刚传入的map对象赋给formParameters，而这不是重点，重点是我蓝标的地方，这里大家看这个方法非常的熟悉，这里重写了request的getParameter()方法，进入方法体，我们先调用父类的getParameter()方法获取我们的value，然后我们在获取formParameters中name对应的value，最后做判断，如果原生的requset可以取出name对应的value，就用第一个，如果取不出来，则用第二个formValue。最后返回。
-
-
-我们想一下整个流程啊，我们的springmvc会调用request的getParameter()方法，这里调用的就是被重写过的getParameter()方法了，以前Tomcat不会封装PUT请求，而这个过滤器做到的就是帮我们封装了PUT请求体中的数据，springmvc可以顺利的得到我们想要的value值了。
-
+该方法执行了三步，先获取书的单价，然后更新我们的库存，最后我们更新用户金额。我们在Test来执行这个方法，我们将数据库里AA用户的金额调成70圆，1001这本书的价格为100，1001有十本库存，我们执行方法后，报异常，余额不足。由于余额不足，我们并没有执行从账户减100的操作，但我们发现我们1001这本书的库存变成了9本。这个问题是相当严重的。用户没有买成功但库存却在减少，想想是不是很可怕。而事务将会帮助我们解决这个问题。
 
 
 
 #### 总结
 
-我们对ajax发送PUT请求无法封装的原因进行了分析及给出了解决方案。我们在分析的过程中也复习了request相关知识。谢谢大家的阅读，我们下篇见。
-
+这一讲我们重点讲解的事务的四大特性以及布置好了我们的需求，我们下一讲将用Spring的事务来解决这个问题。
 
 
 #### 著作权声明
