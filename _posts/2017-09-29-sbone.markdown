@@ -1,0 +1,157 @@
+---
+layout:     post
+title:      "教你写框架系列之Spring Boot第一讲:Spring Boot基础概述与搭建"
+subtitle:   ""
+date:       2017-09-29 12:00:00
+author:     "田俊哲"
+header-img: "img/post-bg-digital-native.jpg"
+tags:
+    - Spring Boot教学
+    - Spring Boot
+---
+
+
+	
+
+
+#### 作者说
+
+大家好，从这章开始我开始领着大家走进Spring Boot框架的世界，该系列的教学使用的开发工具为IDEA，这也是作者推荐的开发工具，而Spring Boot官网则推荐使用Spring Tool Suite[下载](https://spring.io/tools)，Spring Tool Suite其实被吹的有些厉害，其实就是带了插件的Eclipse，如果你是学生，申请自己学校的校园邮箱去IDEA官网下载学生完整版。如果你已经不再风华正茂，乖乖下旗舰版破解吧，当然你也可以花499刀。在写第一讲的时候还没想好这一系列的讲解的体系结构，走一步算一步吧。尽量把握知道的都交给大家。
+
+
+#### Spring Boot概述
+
+如果你还没有学会Spring和它下面的Spring MVC我的建议去先学这些，否则会很难理解，学习没有近路，都知道Spring Boot很方便，但如果你对底层不了解，依然无法控制住强大的Spring Boot。
+
+
+每一门语言的出现以及流行都有它的原因，JAVA也不例外，但同样，JAVA的缺点也相当突出，开发笨重，配置繁多，凯发效率低下，部署复杂，几成第三方难度大，我们拿写SSM举例子，Spring要去配置，SpringMVC要进行配置，MyBatists要进行配置，他们三个之间还要配置，这还是重要的三个，他们依赖的各种包，日志等等等等我们都要去一个一个配置，最后还要打成一个war包，放入Tomcat对应目录进行运行。
+
+就是因为在上述环境下，SpringBoot应运而生，他使用习惯优于配置的思想让你的项目快速运行起来，使用Spring Boot很容易床架哪一个独立运行准生产级别的框架项目，使用Spring Boot可以不用或者很少的Spring配置。
+
+也许这里使用的语言比较官方，大白话就是，Spring Boot为你做了你用ssm搭建框架时的所有事情，甚至还内嵌了servlet容器，这样我们就可以不用再讲项目运行于Tomcat，我们直接打成jar包。直接用cmd运行这个jar包就行，Spring Boot内嵌的Tomcat或者其他服务器可直接帮助我们运行。
+
+这里有个建议，哪怕是作者也无法深入的了解Spring Boot的内部构成，由于是习惯性配置，Spring Boot为你做了太多的事情，导致我们想要对底层修改东西都有些困难。所以不要把你的ssm抛弃。
+
+
+#### Spring Boot搭建
+
+下面我们使用开发工具IDEA来创建一个Spring Boot项目。
+
+
+![java-javascript](/img/in-post/first-sb/1.png)
+
+我们点击创建项目，选择我们的Spring Initalizr，找到我们的jdk，选择默认。下一步。
+
+![java-javascript](/img/in-post/first-sb/2.png)
+
+这里可以按照我的写法，group写com.XXX.XXX我们再给项目起个名字，剩下不用更改。下一步。
+
+![java-javascript](/img/in-post/first-sb/3.png)
+
+这一步相当于IDEA为我们maven的pom文件中添加依赖，我们在这里打钩进入项目就会自动下载jar包，而不会在用手工添加，当然这里没选择的也没关系，我们可以在项目里自己添加。下一步。
+
+
+![java-javascript](/img/in-post/first-sb/4.png)
+
+选择位置，下一步。
+
+![java-javascript](/img/in-post/first-sb/5.png)
+
+通过一段时间的下载jar包，我们进入了项目。我们点开pom文件，里面有我们的Spring Boot相关jar包，也有我们刚才挑钩的包。下一步。
+
+![java-javascript](/img/in-post/first-sb/6.png)
+
+SpringBootDemoApplication相当于我们项目的开关，我们运行该类则会为我们启动整个Spring Boot，下一步。
+
+![java-javascript](/img/in-post/first-sb/7.png)
+
+我们简单来看一下jar包的结构，我们可以在这些jar包中找到很多我们在写ssm时候要自己去添加的jar包，jackson，logback等等，而这里都被spring boot 集成了。下一步。
+
+![java-javascript](/img/in-post/first-sb/8.png)
+
+
+我们来创建一个controller把，目标使用spring boot框架，当我们发送index请求时输出hello world！。这里没有什么难度如果我们学过Spring mvc的话，我们也就简单的回顾一下吧，@RestController这个注解的意是包含了@Controller和@ResponseBody。下一步。
+
+![java-javascript](/img/in-post/first-sb/9.png)
+
+我们点击右上角的小三角，开启开关。下一步。
+
+![java-javascript](/img/in-post/first-sb/10.png)
+
+控制台先是给我们输出了一个大大的spring标志然后开始控制台输出。下一步。
+
+![java-javascript](/img/in-post/first-sb/11.png)
+
+就这样我们发送index请求，打印出hello world出来，这里我们也没有设置tomcat则直接运行成功，印证前面说的内嵌servlet。
+
+![java-javascript](/img/in-post/first-sb/12.png)
+
+下面我们来配置一下Spring boot的热部署，所谓热部署就是当我们启动spring boot之后，每当我们修改代码并且保存spring boot将会自动的重新加载而不需要我们重启。首先我们在pop中添加这个插件包。下一步。
+
+![java-javascript](/img/in-post/first-sb/13.png)
+
+在ideam的设置中找到Compiler，将Build project ...那一行挑勾，然后保存确定。下一步。
+
+![java-javascript](/img/in-post/first-sb/14.png)
+
+ctrl+alt+shift+/ 然后点击第一个。下一步。
+
+![java-javascript](/img/in-post/first-sb/15.png)
+
+我们找到我们蓝底这一行，勾上钩。保存。重启项目，下一步。
+
+![java-javascript](/img/in-post/first-sb/16.png)
+
+我们重新进入controller这个方法，当我们修改返回字段的时候，spring boot将会自动的重新加载。
+
+![java-javascript](/img/in-post/first-sb/17.png)
+
+我们可以从控制台看到其一直在变化。
+
+![java-javascript](/img/in-post/first-sb/18.png)
+
+我们下面来学习一个更加厉害的启动spring boot的方法，打jar包运行。我们再加入一个方法，我们创建一个学生javabean，然后我们动态的获取请求的值，并且返回，这个流程中最核心的就是，我们刚刚由于配置了@RestController所以将返回的是个json串，而以前我们配置的时候需要先添加jackson相关jar包才可运行，而spring boot则直接给我们准备好了。
+
+![java-javascript](/img/in-post/first-sb/19.png)
+
+我们先用传统的方式启动项目。我们发送请求，得到了我们的json串，作者这里使用了浏览器插件，所以看得更优雅。
+
+![java-javascript](/img/in-post/first-sb/20.png)
+
+我们现在开始学另一种方式启动，我们首先要打jar包，我们点击idea右侧的Maven Projects，如果第一次可以不用clean，而是直接的install，以后的每一次都要先删除之前的jar包在安装新的jar包。
+
+![java-javascript](/img/in-post/first-sb/21.png)
+
+我们运行install安装jar包。
+
+![java-javascript](/img/in-post/first-sb/22.png)
+
+控制台输出jar包打包成功。
+
+![java-javascript](/img/in-post/first-sb/23.png)
+
+我们找到我们项目目录下得target，找到了我们的两个新添加的文件，第一个是我们要运行的jar包，里面有我们所依赖的所有包，而第二个则是没有我们依赖的jar包，只是我们写的项目。
+
+![java-javascript](/img/in-post/first-sb/24.png)
+
+我们shift加鼠标右键，点击其中的在控制台运行，进入cmd，我们在cmd中输入如图所示命令。
+
+![java-javascript](/img/in-post/first-sb/25.png)
+
+我们点击确定键，我们的项目开始启动，我们在浏览器访问我们的请求则可得到我们想要的json串。最后嗯ctrl+c退出运行。
+
+
+
+
+#### 总结
+
+
+不知道大家有没有一点小激动，我们的spring boot成功的跑起来了，虽然我们没在里面实现什么功能，bug的几率很小，但每当我们看见spring的大图标，相信大家应该很开心。spring boot是一个很神奇很严谨的框架，而下面我们蒋一篇一篇的深入spring boot。我们下一篇见。
+
+
+
+
+#### 著作权声明
+
+作者 [田俊哲](https://shmilyz.github.io)，首次发布于 [Shmilyz Blog](https://shmilyz.github.io)，本文原创，转载请保留以上链接！
+

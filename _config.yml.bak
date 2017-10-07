@@ -74,7 +74,7 @@ sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in
 
 # Featured Tags
 featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+featured-condition-size: 0              # A tag will be featured if the size of it is more than this condition value
 
 
 
@@ -89,5 +89,10 @@ friends: [
     {
          title: "老史",
          href: "http://sfturing.cn/"
+     }
+        , 
+         {
+         title: "鼻子",
+         href: "https://ice-tear.github.io/"
      }
 ]
