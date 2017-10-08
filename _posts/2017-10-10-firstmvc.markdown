@@ -1,0 +1,101 @@
+---
+layout:     post
+title:      "教你写框架系列之Spring MVC第一讲拦截器配置与源码分析"
+subtitle:   ""
+date:       2017-10-10 12:00:00
+author:     "田俊哲"
+header-img: "img/post-bg-digital-native.jpg"
+tags:
+    - Spring MVC 
+    - Spring MVC教学
+---
+
+
+	
+
+
+#### 作者说
+
+
+
+#### Spring MVC拦截器的配置
+
+
+![java-javascript](/img/in-post/first-mvc/1.png)
+![java-javascript](/img/in-post/first-mvc/2.png)
+![java-javascript](/img/in-post/first-mvc/3.png)
+
+第一步我们创建一个FirstInterceptor类并且实现HandlerInterceptor，每一个实现方法在里面输出对应的方法名即类名
+
+第二步我们在mvc的配置文件将我们的类添加到拦截器中
+
+第三步我们创建一个请求方法handler，在这个方法中输出我们请求体中的内容
+
+我们在网页端发送这个请求，并带着田俊哲你好这两个字符，会发现我们的拦截器起了作用执行方法输出。这样能清晰的看到方法在拦截器的哪一个方法前执行。以及拦截器的执行顺序。
+
+![java-javascript](/img/in-post/first-mvc/4.png)
+
+最后我们要说一下拦截器的其他配置方式，上图所示的配置方式的含义是我们要将该拦截器只作用于“/map”这个请求上。
+
+
+
+#### Spring MVC拦截器源码分析
+
+preHandle	
+
+在目标方法执行之前被执行。我们来一下这个方法对应的源码。
+
+
+![java-javascript](/img/in-post/first-mvc/5.png)
+
+我们debug首先执行到的是上图所示代码处。这里看一下我红框里面的执行代码就是在执行我们的目标方法，而在执行目标方法之前就是执行我们的preHandle方法，我们继续debug进入这个applyPreHandle()方法。这里注意我们的if判断，如果返回的是false，我们则直接返回了，不在执行下面红框的代码了。
+
+
+![java-javascript](/img/in-post/first-mvc/6.png)
+
+我们进来这个applyPreHandle()方法。首先要注意到我们这个preHandle方法的实现需要有一个boolean类型的返回值，这个很重要，说完这个我们来看源码。首先我们对所有的拦截器进行一个遍历for循环，得到我们的每一个拦截器，假如此时就是我们的FirstInterceptor，这个FirstInterceptor对象首先是执行它的preHandle方法，并且进行判断，如果我们实现的preHandle方法返回的是一个false，那么对于这个if判断就是true也就进入了if执行体执行了一个ruturn false。
+
+跳出方法返回也是一个false，那么就可以进入if方法体了，直接return，不在往下执行。就不会有下面的目标方法执行以及渲染视图的步骤了，这就是我们的preHandle方法，以及preHandle里面返回值的作用。这里还要注意一个点，我红框标注的代码，我们在这个方法的类定义了一个int类型的interceptorIndex属性，只要我们的preHandle返回的不是一个false，就可以执行到红框代码，直到我们的preHandle	方法返回false，才返回不执行下面红框代码。也就是说interceptorIndex记录的是一个数量，一个直到返回的是false的拦截器之前的拦截器总数。这个interceptorIndex我们下面还要用到。
+
+
+postHandle	
+
+该方法在目标方法执行完成后，渲染视图(在MVC模型中，控制器将数据填充到模型中，然后将模型传递给一个用来渲染的视图，这就是渲染视图)之前执行，我们来看一下这一部分的源码
+
+![java-javascript](/img/in-post/first-mvc/7.png)
+
+第一个红框开始执行我们的目标方法，而第二个红框就是我们的渲染视图，我这里提点别的只是，我们以前的章节讲过不管你的目标方法handler返回的是String类型还是Model还是Map还是ModelandView最后都会包装成ModelandView，啥时ModelandView，模型和视图，我们这个红框的方法就是渲染视图的作用，我们也就可以从这个方法传入值中找到这个mv，也就是我们的ModelandView，我们继续回到我们要讲的postHandle，postHandle的执行方法被夹在两个红框之间，applyPostHandle()，我们进入这个方法。
+
+![java-javascript](/img/in-post/first-mvc/8.png)
+
+与上一个方法类似我们对我们的interceptors进行一个for循环，但这里要注意一点这里是减循环，不是加循环，我们把这个小注意点留在心中，我们后面的章节会讲到为什么要这样做。别的没有什么不好理解的，我们执行了postHandle方法。当全部遍历完成之后，退出循环，去渲染视图。
+
+
+
+afterCompletion	
+
+该方法在渲染视图之后执行，有了前面两个方法的认识，我们理解这个方法不会那么困难了就。我们来看源码。
+
+![java-javascript](/img/in-post/first-mvc/9.png)
+
+由于距离渲染视图部分代码较远，无法直观地演示该方法在渲染视图下面，我们只要记住渲染视图后执行该方法即可。废话不多说，我们进入方法体。
+
+![java-javascript](/img/in-post/first-mvc/10.png)
+
+这个方法与前面讲的有一定区别，虽然我们依然执行的是for循环，但我们并不是对我们的interceptors进行遍历了，for循环中以interceptorIndex作为参考。执行的只是那些返回了true的拦截器的afterCompletion方法。而且也是执行减运算，也就是说加假如我们有两个拦截器，执行的结果显示的是“2”“1”，而我们preHandle则是“1”“2”。
+
+
+为了更细致的讲解这部分的内容，我特意将这部分内容单独拿出来写了一篇文章，在看下面内容前我们可以先看看这一篇文章。
+
+[Spring MVC源码分析系列之拦截器的运行流程](https://shmilyz.github.io/2017/07/22/Springmvc-two/)
+
+
+
+#### 总结
+
+这一讲我们讲解了spring mvc的拦截器如何配置使用，以及对拦截器部分源码进行了分析。下一讲我们将对spring mvc异常进行处理。
+
+#### 著作权声明
+
+作者 [田俊哲](https://shmilyz.github.io)，首次发布于 [Shmilyz Blog](https://shmilyz.github.io)，本文原创，转载请保留以上链接！
+
